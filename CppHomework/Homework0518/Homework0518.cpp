@@ -28,15 +28,13 @@ void ChangeCh(char* _Arr, char _PrevCh, char _NextCh)
             _Arr[i] = _NextCh;
         ++i;
     }
-
-    return;
 }
 
 int main()
 {
     // 한글 들어가지 않습니다.
     {
-        char Arr[100] = "312312321";
+        char Arr[100] = "11111111111";
         // 3이 나와야 합니다.
         int Result = StringCount(Arr);
 
@@ -46,7 +44,7 @@ int main()
     {
         char Arr[100] = "aaa bbb ccc";
         // "aaa bbb ccc"; => "aaa bbb ddd";
-        ChangeCh(Arr, 'c', 'd');
+        ChangeCh(Arr, 'a', 'd');
 
         int a = 0;
     }
