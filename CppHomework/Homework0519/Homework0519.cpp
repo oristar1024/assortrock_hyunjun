@@ -94,20 +94,36 @@ void NumberToString(int _Number, char* _Right)
 
     int NumDigit = DigitsCount(_Number);
     int tmpNumArr[256];
+    bool isMinus = false;
+    if (_Number < 0)
+        isMinus = true;
 
     for (int i = NumDigit - 1; i > -1; --i)
     {
         int num = _Number % 10;
-        tmpNumArr[i] = num;
+        if (isMinus)
+            tmpNumArr[i] = -num;
+        else
+            tmpNumArr[i] = num;
         _Number /= 10;
     }
 
-    for (int i = 0; i < NumDigit; ++i) 
+    if (isMinus) 
     {
-        _Right[i] = tmpNumArr[i] + 48;
+        _Right[0] = '-';
+        for (int i = 0; i < NumDigit; ++i)
+        {
+            _Right[i+1] = tmpNumArr[i] + 48;
+        }
+    }
+    else 
+    {
+        for (int i = 0; i < NumDigit; ++i)
+        {
+            _Right[i] = tmpNumArr[i] + 48;
+        }
     }
 
-    
     return;
 }
 
@@ -151,12 +167,10 @@ int main()
 
         // Result = "312312";
 
-        NumberToString(321123, Result);
+        NumberToString(-321123, Result);
 
         int a = 0;
     }
-
-    std::cout << "Hello World!\n";
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
