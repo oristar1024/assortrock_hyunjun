@@ -9,7 +9,7 @@
 //    ++ChCount;
 //}
 
-int ChCount(const char* const _string, char Ch)
+int ChCount(const char* const _string, const char Ch)
 {
     if (_string == nullptr)
         return 0;

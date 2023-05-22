@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-int StringCount(char* _Arr)
+int StringCount(const char* _Arr)
 {
 
     if (_Arr == nullptr)
@@ -16,7 +16,7 @@ int StringCount(char* _Arr)
     return i;
 }
 
-void ChangeCh(char* _Arr, char _PrevCh, char _NextCh)
+void ChangeCh(char* _Arr, const char _PrevCh, const char _NextCh)
 {
     if (_Arr == nullptr)
         return;
