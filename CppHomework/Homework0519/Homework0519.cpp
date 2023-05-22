@@ -24,9 +24,6 @@ int ChCount(const char* const _string, const char Ch)
         ++i;
     }
 
-    // for문을 돌리는건 당연한거야.
-
-    // Ch와 같은 문자가 몇개들어있는지 세어서 리턴해주는 함수
     return Count;
 }
 
@@ -165,13 +162,8 @@ int main()
     {
         char Result[256] = {};
 
-        // Result = "312312";
-
         NumberToString(-321123, Result);
 
-        char c = 3;
-
-        std::cout << c;
         int a = 0;
     }
 }
