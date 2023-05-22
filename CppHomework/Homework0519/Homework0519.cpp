@@ -41,7 +41,7 @@ void StrCopy(const char* const _Left, char* _Right)
         _Right[i] = _Left[i];
         ++i;
     }
-    _Right[i] = _Left[i];
+    _Right[i] = 0;
     return;
 }
 
@@ -93,18 +93,18 @@ void NumberToString(int _Number, char* _Right)
         return;
 
     int NumDigit = DigitsCount(_Number);
-    int tmpNumArr[256];
+    int tmpNumArr[256] = {};
     bool isMinus = false;
     if (_Number < 0)
+    {
         isMinus = true;
+        _Number = -_Number;
+    }
 
     for (int i = NumDigit - 1; i > -1; --i)
     {
         int num = _Number % 10;
-        if (isMinus)
-            tmpNumArr[i] = -num;
-        else
-            tmpNumArr[i] = num;
+        tmpNumArr[i] = num;
         _Number /= 10;
     }
 
