@@ -113,14 +113,14 @@ void NumberToString(int _Number, char* _Right)
         _Right[0] = '-';
         for (int i = 0; i < NumDigit; ++i)
         {
-            _Right[i+1] = tmpNumArr[i] + 48;
+            _Right[i + 1] = tmpNumArr[i] + '0';
         }
     }
     else 
     {
         for (int i = 0; i < NumDigit; ++i)
         {
-            _Right[i] = tmpNumArr[i] + 48;
+            _Right[i] = tmpNumArr[i] + '0';
         }
     }
 
@@ -169,6 +169,9 @@ int main()
 
         NumberToString(-321123, Result);
 
+        char c = 3;
+
+        std::cout << c;
         int a = 0;
     }
 }
