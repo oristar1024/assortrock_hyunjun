@@ -31,7 +31,9 @@ int StringCount(const char* _Arr)
 {
 
     if (_Arr == nullptr)
+    {
         return 0;
+    }
 
     int i = 0;
     while (_Arr[i])
@@ -45,6 +47,11 @@ void StatusRender(const char* const _Name, int _Att, int _Hp)
     // 40개로 맞춰오세요.
 
     // 줄바꿈이 안되고 있습니다.
+    if (_Name == nullptr)
+    {
+        return;
+    }
+
     printf_s("%s", _Name);
     for (int i = StringCount(_Name); i < MaxNameLength; ++i)
     {
@@ -62,6 +69,10 @@ void StatusRender(const char* const _Name, int _Att, int _Hp)
 
 void DamagePrint(const char* const _AttName, const char* const _DefName, int _Att)
 {
+    if (_AttName == nullptr || _DefName == nullptr)
+    {
+        return;
+    }
     printf_s("%s가 %s를 공격했습니다.\n", _AttName, _DefName);
     printf_s("%s는 %d의 데미지를 입었습니다.\n", _DefName, _Att);
 }
@@ -86,7 +97,7 @@ int main()
 
     int PlayerHp = 200;
     int PlayerAtt = 40;
-    char PlayerName[40] = "fasdhjkfasdhjkfasdhjfklasdhjkfasdhjfk";
+    char PlayerName[40] = "fasdhjkfasdhjkfasdhjfsdhjffffffddddfffk";
 
     int MonsterHp = 100;
     int MonsterAtt = 10;
