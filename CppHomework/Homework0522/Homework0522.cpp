@@ -123,6 +123,9 @@ int main()
 
         if (PlayerHp <= 0 || MonsterHp <= 0)
         {
+            printf("%s가 죽었습니다. \n", MonsterName);
+            printf("%s의 승리입니다. \n", PlayerName);
+            _getch();
             return 0;
         }
         
@@ -137,6 +140,9 @@ int main()
         DamagePrint(MonsterName, PlayerName, MonsterAtt);
         if (PlayerHp <= 0 || MonsterHp <= 0)
         {
+            printf("%s가 죽었습니다. \n", PlayerName);
+            printf("%s의 승리입니다. \n", MonsterName);
+            _getch();
             return 0;
         }
 
