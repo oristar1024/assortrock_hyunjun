@@ -34,16 +34,19 @@ class Player
 public:
     int HP;
     int ATT;
+    int b;
 };
 
-//  [H][H][H][H][A][A][A][A] //  [T][T][T][T][][][][]
-void TestFunction(Player _Newplayer, int _Test)
+//  [H][H][H][H][A][A][A][A] //  [T][T][T][T][][][][] // [t][t][t][t][][][][]
+void TestFunction(Player _Newplayer, int _Test, int t, int a)
 {
     // 이것도 확인해보세요.
     printf("%llu\n", (__int64)&_Newplayer.HP);
     printf("%llu\n", (__int64)&_Newplayer.ATT);
+    printf("%llu\n", (__int64)&_Newplayer.b);
     printf("%llu\n", (__int64)&_Test);
-
+    printf("%llu\n", (__int64)&t);
+    printf("%llu\n", (__int64)&a);
 }
 
 int main()
@@ -52,7 +55,7 @@ int main()
     Player NewPlayer = Player();
     t.Print();
     printf("\n\n");
-    TestFunction(NewPlayer, 20);
+    TestFunction(NewPlayer, 20, 30, 40);
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
