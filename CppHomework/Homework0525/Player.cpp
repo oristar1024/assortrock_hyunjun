@@ -1,11 +1,12 @@
 #include <iostream>
 #include "Player.h"
+#include "Func.h"
 
 	void Player::StatusRender()
 	{
 		int Count = 0;
 
-		Count = StringCount(Name);
+		Count = global_func::StringCount(Name);
 
 		// 40개로 맞춰오세요.
 

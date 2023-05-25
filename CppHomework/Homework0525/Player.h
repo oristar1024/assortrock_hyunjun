@@ -1,4 +1,5 @@
 #pragma once
+
 class Player
 {
 public:
@@ -13,7 +14,6 @@ public:
 
 	int GetAtt();
 
-
 	bool IsDeath();
 
 
@@ -23,4 +23,5 @@ private:
 	char Name[40] = "Player";
 	int Att = 10;
 	int Hp = 100;
+	static const int LineCount = 40;
 };
