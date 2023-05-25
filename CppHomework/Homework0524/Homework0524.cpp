@@ -18,7 +18,7 @@ public:
     int Y = 0;
     int Z = 0;
     int W = 1;
-
+    
     void operator=(const int4& _Other)
     {
         X = _Other.X;
@@ -37,7 +37,7 @@ public:
 
 };
 
-// 리스 이니셜라이저
+// 리스트 이니셜라이저
 const int4 Left = { -1, 0 };
 const int4 Right = { 1, 0 };
 const int4 Up = { 0, -1 };
@@ -81,7 +81,7 @@ public:
     }
 
 
-    void Print()
+    void Print() const
     {
         for (size_t y = 0; y < YLine; y++)
         {
@@ -110,7 +110,7 @@ public:
     // 그걸 구조체나 클래스로 묶어서 참조형태로 넘기는게 대부분의 상황에서
     // 무조건 이득이다.
 
-    int4 GetPos()
+    int4 GetPos() const
     {
         return Pos;
     }
@@ -195,9 +195,7 @@ int main()
         Screen.Clear();
         Screen.SetPixel(MainPlayer.GetPos(), 'a');
         Screen.Print();
-
         MainPlayer.Input();
+      
     }
-
-
 }
