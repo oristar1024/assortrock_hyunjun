@@ -20,5 +20,4 @@ private:
 	char Name[40] = "Monster";
 	int Att = 10;
 	int Hp = 100;
-	static const int LineCount = 40;
 };

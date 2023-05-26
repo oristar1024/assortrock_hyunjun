@@ -1,11 +1,10 @@
 ﻿// HomeWork0524.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
 //
 
-#include <iostream>
-#include <conio.h>
 #include "Player.h"
 #include "Monster.h"
 #include "FightZone.h"
+
 
 // 문법은 왜 발전했다? 인간이 코드를 덜치기 위해서 발전했습니다.
 int main()
@@ -16,5 +15,5 @@ int main()
 
 	FightZone FZone;
 	FZone.Fight(NewPlayer, NewMonster);
-
 }
+

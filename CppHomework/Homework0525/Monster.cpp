@@ -1,19 +1,17 @@
 #include <iostream>
 #include "Monster.h"
-#include "Func.h"
+#include "Global.h"
 
 void Monster::StatusRender()
 {
-	int Count = 0;
-
-	Count = global_func::StringCount(Name);
+	int Count = Global::StringCount(Name);
 
 	// 40개로 맞춰오세요.
 
 	// 줄바꿈이 안되고 있습니다.
 	printf_s("%s", Name);
 
-	for (size_t i = 0; i < LineCount - Count; i++)
+	for (size_t i = 0; i < Global::LineCount - Count; i++)
 	{
 		printf_s("-");
 	}
@@ -21,7 +19,7 @@ void Monster::StatusRender()
 
 	printf_s("공격력 : %d\n", Att);
 	printf_s("체  력 : %d\n", Hp);
-	for (size_t i = 0; i < LineCount; i++)
+	for (size_t i = 0; i < Global::LineCount; i++)
 	{
 		printf_s("-");
 	}

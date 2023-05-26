@@ -5,11 +5,10 @@ class Player
 public:
 	void StatusRender();
 
-	void DamagePrint(const char* const _AttName, int _Att);
+	void DamagePrint(const char* const, int);
 
-	void Damage(int _Att);
+	void Damage(int);
 
-	// 
 	const char* GetName();
 
 	int GetAtt();
@@ -23,5 +22,4 @@ private:
 	char Name[40] = "Player";
 	int Att = 10;
 	int Hp = 100;
-	static const int LineCount = 40;
 };
