@@ -23,6 +23,7 @@ int main()
         Screen.Clear();
         Screen.SetPixel(MainPlayer.GetPos(), MainPlayer.ch);
         Screen.Print();
+        std::cout << "남은 벽 갯수 : " << Screen.CountWall() << std::endl;
         if (0 != _kbhit()) 
         {
             MainPlayer.Input(&Screen);

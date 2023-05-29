@@ -1,9 +1,12 @@
 #include "Player.h"
 #include "ConsoleScreen.h"
-#include "Bullet.h"
+#include <conio.h>
 
-void Player::Input(ConsoleScreen* _Sreen)
+void Player::Input(ConsoleScreen* _Screen)
 {
+    if (_Screen == nullptr)
+        return;
+
     char Select = (char)_getch();
 
     int4 MovePos = { 0, 0 };
@@ -27,13 +30,13 @@ void Player::Input(ConsoleScreen* _Sreen)
         SetDir(Down);
         break;
     case ' ':
-        Shoot(_Sreen);
+        Shoot(_Screen);
         break;
     default:
         break;
     }
 
-    if (false == _Sreen->IsScreenOut(GetPos() + MovePos) && -1 == _Sreen->WallCollsionDetection(GetPos() + MovePos))
+    if (false == _Screen->IsScreenOut(GetPos() + MovePos) && -1 == _Screen->WallCollsionDetection(GetPos() + MovePos))
     {
         AddPos(MovePos);
     }
@@ -62,6 +65,8 @@ int4 Player::GetDir() const
 
 void Player::Shoot(ConsoleScreen* _Screen)
 {
+    if (_Screen == nullptr)
+        return;
     _Screen->AddBullet(Pos, Dir);
 }
 

@@ -1,7 +1,6 @@
 #pragma once
 #include "Global.h"
 #include "Object.h"
-#include <conio.h>
 class ConsoleScreen;
 class Player : public Object
 {

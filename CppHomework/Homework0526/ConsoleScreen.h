@@ -30,11 +30,13 @@ public:
     void AddBullet(const int4& _Pos, const int4& _Dir);
 
     void Update();
+
+    int CountWall(); /* 테스트용 함수 */
 protected:
 
 
 private:
-    static const int WallCount = 10;
+    static const int WallCount = 40; // 40개 이상 설정금지
     static const int XLine = 20;
     static const int YLine = 10;
     static const int MaxBullet = 50;

@@ -1,7 +1,6 @@
 #include "ConsoleScreen.h"
 #include <iostream>
 #include <random>
-#include <Windows.h>
 
 
 void ConsoleScreen::Init(char _BaseCh)
@@ -12,14 +11,19 @@ void ConsoleScreen::Init(char _BaseCh)
     std::default_random_engine dre(rd());
     std::uniform_int_distribution<int> uidX(0, XLine-1);
     std::uniform_int_distribution<int> uidY(0, YLine-1);
+    int4 PlayerStartPos = { 10, 5 };
 
     for (int i = 0; i < WallCount; ++i)
     {
         ArrWall[i] = Wall();
         int4 tmp = { uidX(dre), uidY(dre) };
+        while (true == CollsionDetection(tmp, PlayerStartPos) || IsScreenOut(tmp)) 
+        {
+            tmp = { uidX(dre), uidY(dre) };
+        }
         for (int j = 0; j < i; ++j) 
         {
-            if (CollsionDetection(tmp, ArrWall[j].GetPos())) 
+            if (CollsionDetection(tmp, ArrWall[j].GetPos()) || CollsionDetection(tmp, PlayerStartPos) || IsScreenOut(tmp))
             {
                 tmp = { uidX(dre, uidY(dre)) };
                 j = -1;
@@ -27,6 +31,7 @@ void ConsoleScreen::Init(char _BaseCh)
         }
         ArrWall[i].SetPos(tmp);
         SetPixel(ArrWall[i].GetPos(), ArrWall[i].ch);
+
     }
 }
 
@@ -54,7 +59,11 @@ void ConsoleScreen::SetBulletPixel()
 }
 void ConsoleScreen::SetPixel(const int4& _Pos, char _Ch)
 {
-    ArrScreen[_Pos.Y][_Pos.X] = _Ch;
+    if (IsScreenOut(_Pos) == false)
+    {
+        ArrScreen[_Pos.Y][_Pos.X] = _Ch;
+    }
+
 }
 
 void ConsoleScreen::Clear()
@@ -143,4 +152,16 @@ void ConsoleScreen::Update()
 void ConsoleScreen::DestroyWall(int i)
 {
     ArrWall[i].SetPos(nullPos);
+}
+
+// 테스트용 함수
+int ConsoleScreen::CountWall()
+{
+    int Count = 0;
+    for (int i = 0; i < YLine; ++i)
+        for (int j = 0; j < XLine; ++j) {
+            if (ArrScreen[i][j] == '0')
+                ++Count;
+        }
+    return Count;
 }
