@@ -4,15 +4,20 @@
 #include <set>
 
 
-void ConsoleScreen::Init(char _BaseCh)
+bool ConsoleScreen::Init(char _BaseCh)
 {
+    if ( WallCount > XLine * YLine - 1) 
+    {
+        printf("벽의 갯수가 최대값을 넘었습니다.\n");
+        return false;
+    }
     BaseCh = _BaseCh;
     Clear();
     std::random_device rd;
     std::default_random_engine dre(rd());
     std::uniform_int_distribution<int> uidX(0, XLine-1);
     std::uniform_int_distribution<int> uidY(0, YLine-1);
-    int4 PlayerStartPos = { 10, 5 };
+    int4 PlayerStartPos = { XLine/2,  YLine/2 };
 
     std::set<std::pair<int, int>> s;
     s.insert(std::make_pair(PlayerStartPos.X, PlayerStartPos.Y));
@@ -50,6 +55,8 @@ void ConsoleScreen::Init(char _BaseCh)
         SetPixel(ArrWall[i].GetPos(), ArrWall[i].ch);
         */
     }
+
+    return true;
 }
 
 void ConsoleScreen::SetWallPixel() 

@@ -11,13 +11,13 @@
 int main()
 {
     ConsoleScreen Screen;
-    Screen.Init('*');
+    bool launch = Screen.Init('*');
 
     Player MainPlayer;
     // 클래스의경우에는 
-    MainPlayer.SetPos({ 10, 5 });
+    MainPlayer.SetPos({ Screen.XLine / 2, Screen.YLine / 2 });
 
-    while (true)
+    while (launch)
     {
         Screen.Update();
         Screen.Clear();

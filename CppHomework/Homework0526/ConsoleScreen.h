@@ -7,7 +7,7 @@ class ConsoleScreen
 {
 public:
 
-    void Init(char _BaseCh);
+    bool Init(char _BaseCh);
 
     void SetPixel(const int4& _Pos, char _Ch);
 
@@ -32,13 +32,14 @@ public:
     void Update();
 
     int CountWall(); /* 테스트용 함수 */
+
+    static const int XLine = 20;
+    static const int YLine = 10;
 protected:
 
 
 private:
     static const int WallCount = 100;
-    static const int XLine = 20;
-    static const int YLine = 10;
     static const int MaxBullet = 50;
     int BulletCount = 0;
     char BaseCh = ' ';
