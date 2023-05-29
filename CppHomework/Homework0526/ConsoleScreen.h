@@ -36,7 +36,7 @@ protected:
 
 
 private:
-    static const int WallCount = 40; // 40개 이상 설정금지
+    static const int WallCount = 199;
     static const int XLine = 20;
     static const int YLine = 10;
     static const int MaxBullet = 50;

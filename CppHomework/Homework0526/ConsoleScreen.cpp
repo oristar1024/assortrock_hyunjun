@@ -1,6 +1,7 @@
 #include "ConsoleScreen.h"
 #include <iostream>
 #include <random>
+#include <set>
 
 
 void ConsoleScreen::Init(char _BaseCh)
@@ -13,9 +14,25 @@ void ConsoleScreen::Init(char _BaseCh)
     std::uniform_int_distribution<int> uidY(0, YLine-1);
     int4 PlayerStartPos = { 10, 5 };
 
+    std::set<std::pair<int, int>> s;
+    s.insert(std::make_pair(PlayerStartPos.X, PlayerStartPos.Y));
+
     for (int i = 0; i < WallCount; ++i)
     {
-        ArrWall[i] = Wall();
+        int4 tmp = { uidX(dre), uidY(dre) };
+        while (IsScreenOut(tmp))
+            tmp = { uidX(dre), uidY(dre) };
+        auto result = s.insert(std::make_pair(tmp.X, tmp.Y));
+        if (result.second)
+        {
+            ArrWall[i].SetPos(tmp);
+            SetPixel(ArrWall[i].GetPos(), ArrWall[i].ch);
+        }
+        else 
+        {
+            --i;
+        }
+        /*
         int4 tmp = { uidX(dre), uidY(dre) };
         while (true == CollsionDetection(tmp, PlayerStartPos) || IsScreenOut(tmp)) 
         {
@@ -31,7 +48,7 @@ void ConsoleScreen::Init(char _BaseCh)
         }
         ArrWall[i].SetPos(tmp);
         SetPixel(ArrWall[i].GetPos(), ArrWall[i].ch);
-
+        */
     }
 }
 
