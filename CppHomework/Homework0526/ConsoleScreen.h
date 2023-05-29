@@ -36,7 +36,7 @@ protected:
 
 
 private:
-    static const int WallCount = 199;
+    static const int WallCount = 100;
     static const int XLine = 20;
     static const int YLine = 10;
     static const int MaxBullet = 50;
