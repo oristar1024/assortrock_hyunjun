@@ -1,13 +1,15 @@
 #include "ConsoleScreen.h"
 #include <iostream>
 #include <random>
+#include <Windows.h>
 
 
 void ConsoleScreen::Init(char _BaseCh)
 {
     BaseCh = _BaseCh;
     Clear();
-    std::default_random_engine dre;
+    std::random_device rd;
+    std::default_random_engine dre(rd());
     std::uniform_int_distribution<int> uidX(0, XLine-1);
     std::uniform_int_distribution<int> uidY(0, YLine-1);
 
@@ -24,7 +26,7 @@ void ConsoleScreen::Init(char _BaseCh)
             }
         }
         ArrWall[i].SetPos(tmp);
-        SetPixel(ArrWall[i].GetPos(), '0');
+        SetPixel(ArrWall[i].GetPos(), ArrWall[i].ch);
     }
 }
 
@@ -32,7 +34,22 @@ void ConsoleScreen::SetWallPixel()
 {
     for (int i = 0; i < WallCount; ++i)
     {
-        SetPixel(ArrWall[i].GetPos(), '0');
+        if (ArrWall[i].GetPos() != nullPos) 
+        {
+            SetPixel(ArrWall[i].GetPos(), ArrWall[i].ch);
+        }
+    }
+}
+
+void ConsoleScreen::SetBulletPixel() 
+{
+    for (int i = 0; i < MaxBullet; ++i)
+    {
+        if (ArrBullet[i].GetPos() != nullPos)
+        {
+            int4 tmp = ArrBullet[i].GetPos();
+            SetPixel(ArrBullet[i].GetPos(), ArrBullet[i].ch);
+        }
     }
 }
 void ConsoleScreen::SetPixel(const int4& _Pos, char _Ch)
@@ -52,6 +69,7 @@ void ConsoleScreen::Clear()
         ArrScreen[y][XLine] = 0;
     }
     SetWallPixel();
+    SetBulletPixel();
 }
 
 bool ConsoleScreen::IsScreenOut(const int4& _Pos) const
@@ -94,12 +112,35 @@ bool ConsoleScreen::CollsionDetection(const int4& lPos, const int4& rPos)
     return lPos == rPos;
 }
 
-bool ConsoleScreen::WallCollsionDetection(const int4& _Pos)
+int ConsoleScreen::WallCollsionDetection(const int4& _Pos)
 {
     for (int i = 0; i < WallCount; ++i) 
     {
         if (CollsionDetection(_Pos, ArrWall[i].GetPos()))
-            return true;
+            return i;
     }
-    return false;
+    return -1;
+}
+
+void ConsoleScreen::AddBullet(const int4& _Pos, const int4& _Dir) 
+{
+    ArrBullet[BulletCount] = Bullet(_Pos, _Dir);
+    ++BulletCount;
+    BulletCount %= MaxBullet;
+}
+
+void ConsoleScreen::Update() 
+{
+    for (int i = 0; i < MaxBullet; ++i) 
+    {
+        if (ArrBullet[i].GetPos() != nullPos)
+        {
+            ArrBullet[i].Update(this);
+        }
+    }
+}
+
+void ConsoleScreen::DestroyWall(int i)
+{
+    ArrWall[i].SetPos(nullPos);
 }

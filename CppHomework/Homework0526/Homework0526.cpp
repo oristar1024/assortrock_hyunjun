@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <conio.h>
+#include <Windows.h>
 #include "ConsoleScreen.h"
 #include "Player.h"
 #include "Wall.h"
@@ -18,9 +19,14 @@ int main()
 
     while (true)
     {
+        Screen.Update();
         Screen.Clear();
-        Screen.SetPixel(MainPlayer.GetPos(), 'a');
+        Screen.SetPixel(MainPlayer.GetPos(), MainPlayer.ch);
         Screen.Print();
-        MainPlayer.Input(&Screen);
+        if (0 != _kbhit()) 
+        {
+            MainPlayer.Input(&Screen);
+        }
+        Sleep(200);
     }
 }

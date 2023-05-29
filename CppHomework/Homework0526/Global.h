@@ -44,12 +44,14 @@ public:
             return false;
         if (Y != _Other.Y)
             return false;
-        if (Z != _Other.Z)
-            return false;
-        if (W != _Other.W)
-            return false;
-
         return true;
     }
 
+    bool operator!=(const int4& _Other) const
+    {
+        if (X != _Other.X || Y != _Other.Y)
+            return true;
+        else
+            return false;
+    }
 };
