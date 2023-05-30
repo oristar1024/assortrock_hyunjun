@@ -7,15 +7,15 @@ class ConsoleScreen
 {
 public:
 
-    bool Init(char _BaseCh);
+    bool Init(const char _BaseCh);
 
-    void SetPixel(const int4& _Pos, char _Ch);
+    void SetPixel(const int4& _Pos, const char _Ch);
 
     void Clear();
 
     bool IsScreenOut(const int4& _Pos) const;
 
-    bool CollsionDetection(const int4& _Lpos, const int4& _Rpos);
+    bool CollsionDetection(const int4& _Lpos, const int4& _Rpos) const;
 
     void Print() const;
 
@@ -23,7 +23,7 @@ public:
 
     void SetBulletPixel();
 
-    int WallCollsionDetection(const int4& _Pos);
+    int WallCollsionDetection(const int4& _Pos) const;
 
     void DestroyWall(int i);
 
@@ -39,13 +39,12 @@ protected:
 
 
 private:
-    static const int WallCount = 100;
+    static const int WallCount = 150;
     static const int MaxBullet = 50;
     int BulletCount = 0;
     char BaseCh = ' ';
     char ArrScreen[YLine][XLine + 1] = {};
     Wall ArrWall[WallCount];
     Bullet ArrBullet[MaxBullet];
-    int4 nullPos = { -1, -1 };
 };
 

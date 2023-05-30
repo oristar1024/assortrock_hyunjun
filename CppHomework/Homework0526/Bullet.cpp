@@ -6,16 +6,15 @@ Bullet::Bullet(const int4& _Pos, const int4& _Dir)
 	Pos = _Pos;
 	Dir = _Dir;
 	ch = 'x';
+	Active = true;
 }
 
 Bullet:: Bullet()
 {
-	Pos = { -1, -1 };
-	Dir = { 0, 0 };
 	ch = 'x';
 }
 
-void Bullet::Update(ConsoleScreen* _Screen)
+void Bullet::Update(ConsoleScreen* const _Screen)
 {
 
 	if (_Screen == nullptr)
@@ -29,11 +28,13 @@ void Bullet::Update(ConsoleScreen* _Screen)
 	{
 		int i = _Screen->WallCollsionDetection(GetPos() + Dir);
 		_Screen->DestroyWall(i);
+		Active = false;
 		Pos = { -1, -1 };
 		Dir = { 0, 0 };
 	}
 	else 
 	{
+		Active = false;
 		Pos = { -1, -1 };
 		Dir = { 0, 0 };
 	}

@@ -8,6 +8,6 @@ class Bullet : public Object
 public:
 	Bullet();
 	Bullet(const int4& _Pos, const int4& _Dir);
-	void Update(ConsoleScreen* _Screen);
+	void Update(ConsoleScreen* const _Screen);
 };
 

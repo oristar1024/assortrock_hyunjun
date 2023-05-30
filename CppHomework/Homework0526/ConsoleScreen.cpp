@@ -6,11 +6,17 @@
 
 bool ConsoleScreen::Init(char _BaseCh)
 {
+    static bool once = false;
+
+    if (once)
+        return false;
+
     if ( WallCount > XLine * YLine - 1) 
     {
         printf("벽의 갯수가 최대값을 넘었습니다.\n");
         return false;
     }
+
     BaseCh = _BaseCh;
     Clear();
     std::random_device rd;
@@ -32,6 +38,7 @@ bool ConsoleScreen::Init(char _BaseCh)
         {
             ArrWall[i].SetPos(tmp);
             SetPixel(ArrWall[i].GetPos(), ArrWall[i].ch);
+            ArrWall[i].SetActive(true);
         }
         else 
         {
@@ -56,6 +63,7 @@ bool ConsoleScreen::Init(char _BaseCh)
         */
     }
 
+    once = true;
     return true;
 }
 
@@ -63,7 +71,7 @@ void ConsoleScreen::SetWallPixel()
 {
     for (int i = 0; i < WallCount; ++i)
     {
-        if (ArrWall[i].GetPos() != nullPos) 
+        if (ArrWall[i].isAcitve()) 
         {
             SetPixel(ArrWall[i].GetPos(), ArrWall[i].ch);
         }
@@ -74,7 +82,7 @@ void ConsoleScreen::SetBulletPixel()
 {
     for (int i = 0; i < MaxBullet; ++i)
     {
-        if (ArrBullet[i].GetPos() != nullPos)
+        if (ArrBullet[i].isAcitve())
         {
             int4 tmp = ArrBullet[i].GetPos();
             SetPixel(ArrBullet[i].GetPos(), ArrBullet[i].ch);
@@ -140,17 +148,23 @@ void ConsoleScreen::Print() const
     }
 }
 
-bool ConsoleScreen::CollsionDetection(const int4& lPos, const int4& rPos)
+bool ConsoleScreen::CollsionDetection(const int4& lPos, const int4& rPos) const
 {
     return lPos == rPos;
 }
 
-int ConsoleScreen::WallCollsionDetection(const int4& _Pos)
+int ConsoleScreen::WallCollsionDetection(const int4& _Pos) const
 {
     for (int i = 0; i < WallCount; ++i) 
     {
+        if (ArrWall[i].isAcitve() == false)
+        {
+            continue;
+        }
         if (CollsionDetection(_Pos, ArrWall[i].GetPos()))
+        {
             return i;
+        }
     }
     return -1;
 }
@@ -158,6 +172,7 @@ int ConsoleScreen::WallCollsionDetection(const int4& _Pos)
 void ConsoleScreen::AddBullet(const int4& _Pos, const int4& _Dir) 
 {
     ArrBullet[BulletCount] = Bullet(_Pos, _Dir);
+    ArrBullet[BulletCount].SetActive(true);
     ++BulletCount;
     BulletCount %= MaxBullet;
 }
@@ -166,7 +181,7 @@ void ConsoleScreen::Update()
 {
     for (int i = 0; i < MaxBullet; ++i) 
     {
-        if (ArrBullet[i].GetPos() != nullPos)
+        if (ArrBullet[i].isAcitve())
         {
             ArrBullet[i].Update(this);
         }
@@ -175,7 +190,8 @@ void ConsoleScreen::Update()
 
 void ConsoleScreen::DestroyWall(int i)
 {
-    ArrWall[i].SetPos(nullPos);
+    ArrWall[i].SetActive(false);
+    ArrWall[i].SetPos({ -1, -1 });
 }
 
 // 테스트용 함수

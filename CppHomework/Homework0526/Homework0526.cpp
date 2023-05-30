@@ -14,8 +14,8 @@ int main()
     bool launch = Screen.Init('*');
 
     Player MainPlayer;
-    // 클래스의경우에는 
     MainPlayer.SetPos({ Screen.XLine / 2, Screen.YLine / 2 });
+    MainPlayer.SetActive(true);
 
     while (launch)
     {

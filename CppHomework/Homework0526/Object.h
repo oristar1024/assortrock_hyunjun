@@ -11,7 +11,12 @@ public:
     void SetPos(const int4& _Pos);
 
     char ch;
+
+    void SetActive(bool _Active);
+
+    bool isAcitve() const;
 protected:
     int4 Pos;
+    bool Active = false;
 };
 

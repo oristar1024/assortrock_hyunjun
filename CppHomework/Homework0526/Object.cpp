@@ -15,3 +15,13 @@ void Object::SetPos(const int4& _Pos)
 {
     Pos = _Pos;
 }
+
+void Object::SetActive(bool _Active)
+{
+    Active = _Active;
+}
+
+bool Object::isAcitve() const
+{
+    return Active;
+}
