@@ -16,7 +16,7 @@ void Object::SetPos(const int4& _Pos)
     Pos = _Pos;
 }
 
-void Object::SetActive(bool _Active)
+void Object::SetActive(const bool _Active)
 {
     Active = _Active;
 }

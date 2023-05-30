@@ -12,7 +12,7 @@ public:
 
     char ch;
 
-    void SetActive(bool _Active);
+    void SetActive(const bool _Active);
 
     bool isAcitve() const;
 protected:

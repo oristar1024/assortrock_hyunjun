@@ -14,7 +14,6 @@ public:
 
 	Player();
 
-
     void Input(ConsoleScreen* _Screen);
 	void SetDir(const int4& _Pos);
 	int4 GetDir() const;
