@@ -7,23 +7,15 @@
 #include "ConsoleScreen.h"
 #include "Player.h"
 #include "Wall.h"
-#include <crtdbg.h>
 
 int main()
 {
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     ConsoleScreen Screen;
     bool launch = Screen.Init('*');
 
     Player MainPlayer;
     MainPlayer.SetPos({ Screen.XLine / 2, Screen.YLine / 2 });
     MainPlayer.SetActive(true);
-    {
-        _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-        int* a = new int(10);
-        a = new int(20);
-        int b = 0;
-    }
 
     while (launch)
     {
@@ -38,5 +30,4 @@ int main()
         }
         Sleep(200);
     }
-
 }

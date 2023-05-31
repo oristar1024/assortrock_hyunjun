@@ -103,4 +103,22 @@ void Test(int option)
 }
 Test(a | c); // 0101
 
-STL : 탬플릿을 사용한 std ??
+Template<typename AAA>
+Func(AAA a)
+함수의 경우 사용시 인자추론이 동작한다. (호출시 자료형을 생략할 수 있다)
+Func/*<int>*/(100)
+Func/*<char>*/(c)
+클래스의 경우 명시적으로 적어줘야한다. (메모리를 얼마나 잡아야하는지 모르기때문)
+Class<int>
+Class<char>
+
+template <typename T>
+class Tclass
+{
+	public:
+	void Func();
+	T value;
+}
+Tclass::Func() // 이경우 클래스의 자료형이 없어서 동작하지 않는다. Tclass<int>::Func()처럼 해줘야한다.
+이거 안하려고 쓰는 문법이 템플릿 이므로 일반적으로 템플릿 클래스는 헤더에서 전부 구현한다.
+
