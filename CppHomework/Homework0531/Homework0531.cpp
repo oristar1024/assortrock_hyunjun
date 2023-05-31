@@ -11,19 +11,37 @@
 // std 자료구조가 할수 있다면
 // 나도 똑같은 짓을 하고 똑같은 결과를 내는 클래스를 만들어 보는게.
 
-// 숙제 => HVector의 leck을 없애와라
+// 숙제0 => HVector의 leak을 없애와라
 //         대입연산자를 사용하면 터지는걸 정상으로 돌려놔라.
 //         이미 보여준 코드 이미 array에서 해결은 한거에요.
 
+// 숙제1 => 템플릿으로 바꾸세요.
 
-using DataType = int;
-
+template <typename DataType>
 class HVector
 {
 public:
 	DataType& operator[](size_t _Index)
 	{
 		return ArrPtr[_Index];
+	}
+
+	HVector& operator=(const HVector& _other)
+	{
+		if (ArrPtr != nullptr)
+		{
+			delete[] ArrPtr;
+		}
+		sizeValue = _other.sizeValue;
+		capacityValue = _other.capacityValue;
+
+		reserve(capacityValue);
+
+		for (int i = 0; i < _other.sizeValue; ++i)
+		{
+			ArrPtr[i] = _other.ArrPtr[i];
+		}
+		return *this;
 	}
 
 	size_t size()
@@ -65,13 +83,14 @@ public:
 		}
 
 		capacityValue = _capacity;
+		delete[] PrevPtr;
 	}
 
 	~HVector()
 	{
 		if (nullptr != ArrPtr)
 		{
-			delete ArrPtr;
+			delete[] ArrPtr;
 			ArrPtr = nullptr;
 		}
 	}
@@ -150,8 +169,9 @@ int main()
 	//}
 
 
+	// 여기를 건들지 마세요.
 	{
-		HVector Arr;
+		HVector<int> Arr;
 		// 내부에 123
 		// Arr.reserve(10);
 		for (size_t i = 0; i < 10; i++)
@@ -167,7 +187,7 @@ int main()
 		}
 
 
-		HVector Arr0;
+		HVector<int> Arr0;
 
 		// 릭을 해결하는 순간 터질겁니다.
 		// 정상적인 복사가 이루어지게 하세요.
