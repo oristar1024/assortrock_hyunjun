@@ -31,6 +31,7 @@ public:
 		if (ArrPtr != nullptr)
 		{
 			delete[] ArrPtr;
+			Arrptr = nullptr;
 		}
 		sizeValue = _other.sizeValue;
 		capacityValue = _other.capacityValue;
