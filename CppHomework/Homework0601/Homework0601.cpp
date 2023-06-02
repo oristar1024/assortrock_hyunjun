@@ -28,7 +28,7 @@ private:
 	class ListNode
 	{
 	public:
-		DataType Value;
+		DataType Value = 0;
 		ListNode* Prev = nullptr;
 		ListNode* Next = nullptr;
 	};
@@ -159,6 +159,9 @@ public:
 
 	~HList()
 	{
+		if (StartNode == nullptr)
+			return;
+
 		ListNode* cur = StartNode;
 		ListNode* next = StartNode->Next;
 
@@ -179,7 +182,6 @@ private:
 int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
 
 	{
 		std::vector<int> Test;
