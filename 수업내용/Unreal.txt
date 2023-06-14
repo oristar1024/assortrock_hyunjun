@@ -1,0 +1,11 @@
+level(.umap) = Scene
+콘텐츠 드로워 = inspector
+아웃라이너 = Hierarchy
+
+Light
+DirectionalLight - 메인라이트, level의 빛을 반사하는 모든 물체에 적용
+
+.uproject 쉬프트 우클릭 - 버전변경, cpp프로젝트파일 생성, 빌드까지 가능
+
+시작맵 변경
+편집 -> 프로젝트설정 -> 맵&모드 -> 에디더 시작 맵(세팅은 config에 저장되므로 ignore하면안됨)
